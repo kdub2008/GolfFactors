@@ -8,14 +8,13 @@ Predicting your Tournament Winners with Course Intelligence
 - **GitHub Repository**: https://github.com/kdub2008/GolfFactors
 
 ### GitHub Pages URL (Once Enabled)
-- **Live Website**: https://kdub2008.github.io/GolfFactors/GolfFactors.html
+- **Live Website**: https://kdub2008.github.io/GolfFactors/
   - Note: GitHub Pages needs to be enabled first (see instructions below)
-  - Alternative: Rename `GolfFactors.html` to `index.html` to use https://kdub2008.github.io/GolfFactors/
 
 ### Local Access
 If you've cloned the repository locally, you can open the file directly:
-- File path: `GolfFactors.html`
-- Open in browser: `file:///path/to/your/local/GolfFactors/GolfFactors.html`
+- File path: `index.html`
+- Open in browser: `file:///path/to/your/local/GolfFactors/index.html`
 
 ## About Golf Factors
 
@@ -50,7 +49,7 @@ This balance ensures we identify golfers who both fit the course and are playing
 
 ## Usage
 
-Simply open the `GolfFactors.html` file in a web browser:
+Simply open the `index.html` file in a web browser:
 
 1. Choose a tournament from the dropdown menu
 2. View the predicted top golfers for that specific course
@@ -66,20 +65,9 @@ To make this website accessible online via GitHub Pages, follow these steps:
 4. Under **Source**, select the branch you want to deploy (e.g., `main` or the branch with your latest changes)
 5. Select **/ (root)** as the folder
 6. Click **Save**
-7. Your site will be published at:
-   - **With current filename**: https://kdub2008.github.io/GolfFactors/GolfFactors.html
-   - **Or rename to index.html** for simpler URL: https://kdub2008.github.io/GolfFactors/
+7. Your site will be published at: https://kdub2008.github.io/GolfFactors/
 
 Note: It may take a few minutes for the site to become available after enabling GitHub Pages.
-
-### Recommended: Rename for cleaner URL
-For a cleaner URL, consider renaming `GolfFactors.html` to `index.html`:
-```bash
-git mv GolfFactors.html index.html
-git commit -m "Rename to index.html for GitHub Pages"
-git push
-```
-Then your site will be accessible at: https://kdub2008.github.io/GolfFactors/
 
 ## Technical Details
 
