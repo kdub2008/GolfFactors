@@ -7,8 +7,10 @@ Predicting your Tournament Winners with Course Intelligence
 ### Repository URL
 - **GitHub Repository**: https://github.com/kdub2008/GolfFactors
 
-### GitHub Pages URL
+### GitHub Pages URL (Once Enabled)
 - **Live Website**: https://kdub2008.github.io/GolfFactors/GolfFactors.html
+  - Note: GitHub Pages needs to be enabled first (see instructions below)
+  - Alternative: Rename `GolfFactors.html` to `index.html` to use https://kdub2008.github.io/GolfFactors/
 
 ### Local Access
 If you've cloned the repository locally, you can open the file directly:
@@ -56,17 +58,28 @@ Simply open the `GolfFactors.html` file in a web browser:
 
 ## Enabling GitHub Pages
 
-To make this website accessible at the GitHub Pages URL, follow these steps:
+To make this website accessible online via GitHub Pages, follow these steps:
 
 1. Go to your repository: https://github.com/kdub2008/GolfFactors
 2. Click on **Settings**
 3. Navigate to **Pages** in the left sidebar
-4. Under **Source**, select the branch (usually `main` or `master`)
+4. Under **Source**, select the branch (usually `main` or `copilot/define-url-endpoint`)
 5. Select **/ (root)** as the folder
 6. Click **Save**
-7. Your site will be published at: https://kdub2008.github.io/GolfFactors/GolfFactors.html
+7. Your site will be published at:
+   - **With current filename**: https://kdub2008.github.io/GolfFactors/GolfFactors.html
+   - **Or rename to index.html** for simpler URL: https://kdub2008.github.io/GolfFactors/
 
 Note: It may take a few minutes for the site to become available after enabling GitHub Pages.
+
+### Recommended: Rename for cleaner URL
+For a cleaner URL, consider renaming `GolfFactors.html` to `index.html`:
+```bash
+git mv GolfFactors.html index.html
+git commit -m "Rename to index.html for GitHub Pages"
+git push
+```
+Then your site will be accessible at: https://kdub2008.github.io/GolfFactors/
 
 ## Technical Details
 
