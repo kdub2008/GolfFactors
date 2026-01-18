@@ -63,7 +63,7 @@ To make this website accessible online via GitHub Pages, follow these steps:
 1. Go to your repository: https://github.com/kdub2008/GolfFactors
 2. Click on **Settings**
 3. Navigate to **Pages** in the left sidebar
-4. Under **Source**, select the branch (usually `main` or `copilot/define-url-endpoint`)
+4. Under **Source**, select the branch you want to deploy (e.g., `main` or the branch with your latest changes)
 5. Select **/ (root)** as the folder
 6. Click **Save**
 7. Your site will be published at:
@@ -89,7 +89,14 @@ Then your site will be accessible at: https://kdub2008.github.io/GolfFactors/
 
 ## Data Source
 
-Professional predictions powered by statistical analysis of PGA Tour player performance metrics.
+This is a demonstration application showing how golf analytics could work. The player statistics and predictions shown are examples for illustrative purposes. 
+
+For a production version, data would typically be sourced from:
+- Official PGA Tour statistics (SG: Strokes Gained metrics)
+- Golf statistics providers (DataGolf, FantasyNational, etc.)
+- Historical tournament performance data
+
+The current version serves as a framework for implementing a real-time golf prediction system with actual statistical data.
 
 ---
 
