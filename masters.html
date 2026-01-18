@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masters Tournament - Golf Factors</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a3d2a 0%, #1a5f3f 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(135deg, #0a3d2a 0%, #0f4f34 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid #f4a460;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+        h1 {
+            color: white;
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .tagline {
+            color: #f4a460;
+            font-size: 1em;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+        .nav {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            background-color: #f4a460;
+            color: #0a3d2a;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .nav a:hover {
+            background-color: #e68040;
+            box-shadow: 0 4px 12px rgba(244, 164, 96, 0.3);
+        }
+        .tournament-selector {
+            flex: 1;
+            min-width: 250px;
+        }
+        .tournament-selector select {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 15px;
+            border: 2px solid #0a3d2a;
+            border-radius: 6px;
+            background-color: white;
+            cursor: pointer;
+            font-weight: 500;
+            color: #0a3d2a;
+            transition: all 0.3s ease;
+        }
+        .tournament-selector select:hover {
+            background-color: #f9f9f9;
+            border-color: #f4a460;
+            box-shadow: 0 4px 12px rgba(244, 164, 96, 0.2);
+        }
+        .tournament-selector select:focus {
+            outline: none;
+            border-color: #f4a460;
+            box-shadow: 0 0 0 3px rgba(244, 164, 96, 0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-left: 5px solid #f4a460;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #0a3d2a;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background-color: #f4a460;
+            border-radius: 2px;
+        }
+        p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+        ul {
+            margin-left: 20px;
+            color: #555;
+        }
+        ul li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: linear-gradient(135deg, #0a3d2a 0%, #0f4f34 100%);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        th:hover {
+            background: linear-gradient(135deg, #0f4f34 0%, #1a5f3f 100%);
+            box-shadow: 0 2px 8px rgba(244, 164, 96, 0.2);
+        }
+        td {
+            color: #555;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #0a3d2a;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #f4a460;
+            box-shadow: 0 0 0 3px rgba(244, 164, 96, 0.1);
+        }
+        .footer-note {
+            text-align: center;
+            color: white;
+            font-size: 0.9em;
+            opacity: 0.8;
+            padding: 30px 20px 0;
+            font-style: italic;
+        }
+        .course-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>
+            <svg width="65" height="65" viewBox="0 0 40 40" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+                <defs>
+                    <linearGradient id="flagGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#f4a460;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e68040;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <!-- Flag pole -->
+                <line x1="20" y1="5" x2="20" y2="35" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Flag -->
+                <path d="M 20 8 L 20 15 L 32 11.5 Z" fill="url(#flagGradient)" stroke="#d4823f" stroke-width="1.5"/>
+                <!-- Flag fold effect -->
+                <path d="M 20 15 Q 26 13 32 11.5" fill="none" stroke="#d4823f" stroke-width="1" opacity="0.6"/>
+            </svg>
+            Masters Tournament
+        </h1>
+        <p class="tagline">Augusta National Golf Club</p>
+    </header>
+    <div class="container">
+        <div class="nav">
+            <a href="GolfFactors.html">← Back to Home</a>
+            <div class="tournament-selector">
+                <select onchange="if(this.value) window.location.href = this.value;">
+                    <option value="">-- Select Tournament --</option>
+                    <optgroup label="MAJORS">
+                        <option value="masters.html" selected>Masters Tournament (Augusta)</option>
+                        <option value="us-open.html">U.S. Open Championship</option>
+                        <option value="pga-championship.html">PGA Championship (Valhalla)</option>
+                        <option value="open-championship.html">The Open Championship (Royal Birkdale)</option>
+                    </optgroup>
+                    <optgroup label="SIGNATURE EVENTS">
+                        <option value="players.html">Players Championship (TPC Sawgrass)</option>
+                        <option value="arnold-palmer.html">Arnold Palmer Invitational (Bay Hill)</option>
+                        <option value="valspar.html">Valspar Championship</option>
+                        <option value="wells-fargo.html">Wells Fargo Championship</option>
+                    </optgroup>
+                    <optgroup label="FALL EVENTS">
+                        <option value="wm-phoenix.html">WM Phoenix Open</option>
+                        <option value="pebble-beach.html">Pebble Beach Pro-Am</option>
+                        <option value="farmers-insurance.html">Farmers Insurance Open</option>
+                        <option value="sony-open.html">Sony Open in Hawaii</option>
+                    </optgroup>
+                    <optgroup label="SPRING/SUMMER EVENTS">
+                        <option value="american-express.html">American Express Championship</option>
+                        <option value="charles-schwab.html">Charles Schwab Challenge (Colonial)</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=1200&q=80" alt="Augusta National Golf Club - Masters Tournament" class="course-image">
+        <div class="section">
+        <h2>Course Summary</h2>
+        <p>Augusta National Golf Club, Par 72, Length: 7,475 yards</p>
+    </div>
+    <div class="section">
+        <h2>How it Plays</h2>
+        <p>The Masters is known for its fast greens, strategic bunkering, and challenging par 5s. Accuracy off the tee is crucial due to narrow fairways, and scrambling is important around the greens.</p>
+    </div>
+    <div class="section">
+        <h2>Key Stats for Success</h2>
+        <ul>
+            <li><strong>SG: Around the Green</strong> - Short game wizardry is required for up-and-downs on Augusta's tricky slopes and undulating greens</li>
+            <li><strong>Scrambling</strong> - Recovery ability around Augusta's challenging greens separates contenders from pretenders</li>
+            <li><strong>SG: Approach the Green</strong> - Precision iron play is essential to attack Augusta's demanding pin positions</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h2>Matching Golfers</h2>
+        <p>Based on current stats, here are the top golfers who fit the Masters profile. Fit Score weights: 40% SG: Around Green, 25% Scrambling, 10% SG: Approach, 25% Consecutive Cuts.</p>
+        <input type="text" id="filterInput" onkeyup="filterGolferTable()" placeholder="Filter by golfer name">
+        <table id="golferTable">
+            <tr>
+                <th onclick="sortTableByColumn(0)">Golfer</th>
+                <th onclick="sortTableByColumn(1)">SG: Approach</th>
+                <th onclick="sortTableByColumn(2)">Scrambling</th>
+                <th onclick="sortTableByColumn(3)">SG: Around</th>
+                <th onclick="sortTableByColumn(4)">Consec Cuts</th>
+                <th onclick="sortTableByColumn(5)">Fit Score</th>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- Load shared data and analytics -->
+    <script src="golfers-data.js"></script>
+    <script src="golf-analytics.js"></script>
+    
+    </div>
+    <p class="footer-note">🏌️ Data-driven golf analytics | Professional predictions powered by statistical analysis</p>
+
+    <script>
+        const courseConfig = {
+            weights: {
+                sg_around_green: 0.40,
+                scrambling: 0.25,
+                sg_approach_green: 0.10,
+                consecutive_cuts: 0.25
+            },
+            displayColumns: ['sg_around_green', 'scrambling', 'sg_approach_green', 'consecutive_cuts'],
+            normalization: {
+                sg_approach_green: { min: -1.5, max: 2.0 },
+                scrambling: { min: 50, max: 70 },
+                sg_around_green: { min: -0.5, max: 0.7 },
+                driving_accuracy: { min: 45, max: 75 },
+                top10_count: { min: 0, max: 10 },
+                consecutive_cuts: { min: 0, max: 15 }
+            },
+            formatting: {
+                sg_approach_green: { decimals: 2, prefix: '', suffix: '' },
+                scrambling: { decimals: 1, prefix: '', suffix: '%' },
+                sg_around_green: { decimals: 2, prefix: '', suffix: '' },
+                driving_accuracy: { decimals: 1, prefix: '', suffix: '%' },
+                top10_count: { decimals: 0, prefix: '', suffix: '' },
+                consecutive_cuts: { decimals: 0, prefix: '', suffix: '' },
+                fit_score: { decimals: 1, prefix: '', suffix: '' }
+            },
+            tableId: 'golferTable'
+        };
+
+        initializeCourseAnalysis(courseConfig);
+    </script>
+</body>
+</html>

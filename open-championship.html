@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Open Championship - Golf Factors</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a3d2a 0%, #1a5f3f 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(135deg, #0a3d2a 0%, #0f4f34 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid #f4a460;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+        h1 {
+            color: white;
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .tagline {
+            color: #f4a460;
+            font-size: 1em;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+        .nav {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            background-color: #f4a460;
+            color: #0a3d2a;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .nav a:hover {
+            background-color: #e68040;
+            box-shadow: 0 4px 12px rgba(244, 164, 96, 0.3);
+        }
+        .tournament-selector {
+            flex: 1;
+            min-width: 250px;
+        }
+        .tournament-selector select {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 15px;
+            border: 2px solid #0a3d2a;
+            border-radius: 6px;
+            background-color: white;
+            cursor: pointer;
+            font-weight: 500;
+            color: #0a3d2a;
+            transition: all 0.3s ease;
+        }
+        .tournament-selector select:hover {
+            background-color: #f9f9f9;
+            border-color: #f4a460;
+            box-shadow: 0 4px 12px rgba(244, 164, 96, 0.2);
+        }
+        .tournament-selector select:focus {
+            outline: none;
+            border-color: #f4a460;
+            box-shadow: 0 0 0 3px rgba(244, 164, 96, 0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-left: 5px solid #f4a460;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #0a3d2a;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background-color: #f4a460;
+            border-radius: 2px;
+        }
+        p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+        ul {
+            margin-left: 20px;
+            color: #555;
+        }
+        ul li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: linear-gradient(135deg, #0a3d2a 0%, #0f4f34 100%);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        th:hover {
+            background: linear-gradient(135deg, #0f4f34 0%, #1a5f3f 100%);
+            box-shadow: 0 2px 8px rgba(244, 164, 96, 0.2);
+        }
+        td {
+            color: #555;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #0a3d2a;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #f4a460;
+            box-shadow: 0 0 0 3px rgba(244, 164, 96, 0.1);
+        }
+        .footer-note {
+            text-align: center;
+            color: white;
+            font-size: 0.9em;
+            opacity: 0.8;
+            padding: 30px 20px 0;
+            font-style: italic;
+        }
+        .course-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>
+            <svg width="65" height="65" viewBox="0 0 40 40" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+                <defs>
+                    <linearGradient id="flagGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#f4a460;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e68040;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <!-- Flag pole -->
+                <line x1="20" y1="5" x2="20" y2="35" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Flag -->
+                <path d="M 20 8 L 20 15 L 32 11.5 Z" fill="url(#flagGradient)" stroke="#d4823f" stroke-width="1.5"/>
+                <!-- Flag fold effect -->
+                <path d="M 20 15 Q 26 13 32 11.5" fill="none" stroke="#d4823f" stroke-width="1" opacity="0.6"/>
+            </svg>
+            The Open Championship
+        </h1>
+        <p class="tagline">Royal Birkdale - Links Championship Test</p>
+    </header>
+    <div class="container">
+        <div class="nav">
+            <a href="GolfFactors.html">← Back to Home</a>
+            <div class="tournament-selector">
+                <select onchange="if(this.value) window.location.href = this.value;">
+                    <option value="">-- Select Tournament --</option>
+                    <optgroup label="MAJORS">
+                        <option value="masters.html">Masters Tournament (Augusta)</option>
+                        <option value="us-open.html">U.S. Open Championship</option>
+                        <option value="pga-championship.html">PGA Championship (Valhalla)</option>
+                        <option value="open-championship.html" selected>The Open Championship (Royal Birkdale)</option>
+                    </optgroup>
+                    <optgroup label="SIGNATURE EVENTS">
+                        <option value="players.html">Players Championship (TPC Sawgrass)</option>
+                        <option value="arnold-palmer.html">Arnold Palmer Invitational (Bay Hill)</option>
+                        <option value="valspar.html">Valspar Championship</option>
+                        <option value="wells-fargo.html">Wells Fargo Championship</option>
+                    </optgroup>
+                    <optgroup label="FALL EVENTS">
+                        <option value="wm-phoenix.html">WM Phoenix Open</option>
+                        <option value="pebble-beach.html">Pebble Beach Pro-Am</option>
+                        <option value="farmers-insurance.html">Farmers Insurance Open</option>
+                        <option value="sony-open.html">Sony Open in Hawaii</option>
+                    </optgroup>
+                    <optgroup label="SPRING/SUMMER EVENTS">
+                        <option value="american-express.html">American Express Championship</option>
+                        <option value="charles-schwab.html">Charles Schwab Challenge (Colonial)</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1593111774240-d529f12baaa8?w=1200&q=80" alt="Royal Birkdale - The Open Championship" class="course-image">
+        <div class="section">
+        <h2>Course Summary</h2>
+        <p><strong>Host Course:</strong> Royal Birkdale, <strong>Par:</strong> 70, <strong>Length:</strong> 7,200 yards</p>
+    </div>
+    <div class="section">
+        <h2>How it Plays</h2>
+        <p>The Open Championship at Royal Birkdale is a links-style test with firm greens, strong winds, and strategic bunkering. Ball control is paramount with tight fairways and deep rough. Scrambling and course management are essential.</p>
+    </div>
+    <div class="section">
+        <h2>Key Stats for Success</h2>
+        <ul>
+            <li><strong>Scrambling</strong> - Recovery ability in links golf is paramount with pot bunkers, wind, and firm conditions</li>
+            <li><strong>SG: Around the Green</strong> - Elite short game skills are essential for navigating links-style challenges</li>
+            <li><strong>Bogey Avoidance</strong> - Minimizing mistakes in unpredictable conditions separates champions from contenders</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h2>Matching Golfers</h2>
+        <p>Based on current stats, here are the top golfers who fit the Open Championship profile. Fit Score weights: 40% Scrambling, 25% SG: Around, 10% Bogeys/Round, 25% Consecutive Cuts.</p>
+        <input type="text" id="filterInput" onkeyup="filterGolferTable()" placeholder="Filter by golfer name">
+        <table id="golferTable">
+            <tr>
+                <th onclick="sortTableByColumn(0)">Golfer</th>
+                <th onclick="sortTableByColumn(1)">Scrambling</th>
+                <th onclick="sortTableByColumn(2)">SG Around</th>
+                <th onclick="sortTableByColumn(3)">Bogeys/Rnd</th>
+                <th onclick="sortTableByColumn(4)">Consec Cuts</th>
+                <th onclick="sortTableByColumn(5)">Fit Score</th>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- Load shared data and analytics -->
+    <script src="golfers-data.js"></script>
+    <script src="golf-analytics.js"></script>
+    
+    <script>
+        const courseConfig = {
+            weights: {
+                scrambling: 0.40,
+                sg_around_green: 0.25,
+                bogeys_per_round: 0.10,
+                consecutive_cuts: 0.25
+            },
+            displayColumns: ['scrambling', 'sg_around_green', 'bogeys_per_round', 'consecutive_cuts'],
+            normalization: {
+                scrambling: { min: 50, max: 70 },
+                sg_around_green: { min: -1.0, max: 1.5 },
+                driving_accuracy: { min: 45, max: 75 },
+                bogeys_per_round: { min: 2.0, max: 3.0, invert: true },
+                top10_count: { min: 0, max: 10 },
+                consecutive_cuts: { min: 0, max: 15 }
+            },
+            formatting: {
+                scrambling: { decimals: 1, prefix: '', suffix: '%' },
+                sg_around_green: { decimals: 2, prefix: '', suffix: '' },
+                driving_accuracy: { decimals: 1, prefix: '', suffix: '%' },
+                bogeys_per_round: { decimals: 2, prefix: '', suffix: '' },
+                top10_count: { decimals: 0, prefix: '', suffix: '' },
+                consecutive_cuts: { decimals: 0, prefix: '', suffix: '' },
+                fit_score: { decimals: 1, prefix: '', suffix: '' }
+            },
+            tableId: 'golferTable'
+        };
+
+        initializeCourseAnalysis(courseConfig);
+    </script>
+</body>
+</html> "driving_accuracy": 73.85, "scrambling": 58, "putting_avg": 1.78, "sg_approach": 0.32},{"name": "Paul Peterson", "driving_accuracy": 73.15, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.18},{"name": "Ben Kohles", "driving_accuracy": 73.12, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.35},{"name": "Andrew Putnam", "driving_accuracy": 71.77, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.28},{"name": "Joel Dahmen", "driving_accuracy": 71.21, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.42},{"name": "Collin Morikawa", "driving_accuracy": 70.65, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.55},{"name": "Brice Garnett", "driving_accuracy": 69.39, "scrambling": 64, "putting_avg": 1.71, "sg_approach": 0.22},{"name": "Zach Johnson", "driving_accuracy": 69.21, "scrambling": 65, "putting_avg": 1.70, "sg_approach": 0.38},{"name": "Brandt Snedeker", "driving_accuracy": 69.03, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.45},{"name": "Max McGreevy", "driving_accuracy": 68.77, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.30},{"name": "Russell Henley", "driving_accuracy": 68.68, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.48},{"name": "Emiliano Grillo", "driving_accuracy": 68.47, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.35},{"name": "Lucas Glover", "driving_accuracy": 68.36, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.25},{"name": "Zac Blair", "driving_accuracy": 68.15, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.40},{"name": "Sungjae Im", "driving_accuracy": 68.01, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.52},{"name": "John Pak", "driving_accuracy": 67.73, "scrambling": 64, "putting_avg": 1.71, "sg_approach": 0.28},{"name": "Rico Hoey", "driving_accuracy": 67.69, "scrambling": 65, "putting_avg": 1.70, "sg_approach": 0.35},{"name": "Carson Young", "driving_accuracy": 67.25, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.48},{"name": "Si Woo Kim", "driving_accuracy": 66.79, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.32},{"name": "Brian Campbell", "driving_accuracy": 66.77, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.40},{"name": "Noah Goodwin", "driving_accuracy": 66.77, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.38},{"name": "Corey Conners", "driving_accuracy": 66.64, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.45},{"name": "Nick Taylor", "driving_accuracy": 66.58, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.28},{"name": "Daniel Berger", "driving_accuracy": 66.42, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.50},{"name": "J.T. Poston", "driving_accuracy": 66.15, "scrambling": 64, "putting_avg": 1.71, "sg_approach": 0.25},{"name": "Austin Eckroat", "driving_accuracy": 66.12, "scrambling": 65, "putting_avg": 1.70, "sg_approach": 0.42},{"name": "Matt Kuchar", "driving_accuracy": 66.00, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.35},{"name": "Adam Svensson", "driving_accuracy": 65.97, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.48},{"name": "Sepp Straka", "driving_accuracy": 65.66, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.30},{"name": "Hayden Buckley", "driving_accuracy": 65.63, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.40},{"name": "Christiaan Bezuidenhout", "driving_accuracy": 65.46, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.52},{"name": "Greyson Sigg", "driving_accuracy": 65.42, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.28},{"name": "Kevin Roy", "driving_accuracy": 65.40, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.45},{"name": "Tommy Fleetwood", "driving_accuracy": 65.37, "scrambling": 64, "putting_avg": 1.71, "sg_approach": 0.38},{"name": "David Lipsky", "driving_accuracy": 65.32, "scrambling": 65, "putting_avg": 1.70, "sg_approach": 0.35},{"name": "Matt McCarty", "driving_accuracy": 65.06, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.48},{"name": "Lee Hodges", "driving_accuracy": 64.95, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.32},{"name": "Victor Perez", "driving_accuracy": 64.66, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.42},{"name": "Nico Echavarria", "driving_accuracy": 64.49, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.30},{"name": "Justin Lower", "driving_accuracy": 64.45, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.40},{"name": "Kevin Velo", "driving_accuracy": 64.30, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.50},{"name": "Henrik Norlander", "driving_accuracy": 64.29, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.25},{"name": "Thorbjørn Olesen", "driving_accuracy": 64.29, "scrambling": 64, "putting_avg": 1.71, "sg_approach": 0.48},{"name": "Doug Ghim", "driving_accuracy": 64.27, "scrambling": 65, "putting_avg": 1.70, "sg_approach": 0.35},{"name": "Chad Ramey", "driving_accuracy": 64.24, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.42},{"name": "Ben Silverman", "driving_accuracy": 64.17, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.28},{"name": "Michael Thorbjornsen", "driving_accuracy": 64.16, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.45},{"name": "Davis Thompson", "driving_accuracy": 64.13, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.38},{"name": "Alex Smalley", "driving_accuracy": 63.96, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.32},{"name": "Seamus Power", "driving_accuracy": 63.84, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.50},{"name": "Rickie Fowler", "driving_accuracy": 63.69, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.25},{"name": "Ryan Gerard", "driving_accuracy": 63.38, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.40},{"name": "Brian Harman", "driving_accuracy": 63.32, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.48},{"name": "Kevin Yu", "driving_accuracy": 63.29, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.35},{"name": "Pierceson Coody", "driving_accuracy": 63.26, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.42},{"name": "Luke List", "driving_accuracy": 63.23, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.30},{"name": "Viktor Hovland", "driving_accuracy": 63.13, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.52},{"name": "Scottie Scheffler", "driving_accuracy": 63.04, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.85},{"name": "Shane Lowry", "driving_accuracy": 63.01, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.28},{"name": "Thriston Lawrence", "driving_accuracy": 62.95, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.45},{"name": "Matthieu Pavon", "driving_accuracy": 62.83, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.38},{"name": "Kris Ventura", "driving_accuracy": 62.69, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.40},{"name": "Thomas Rosenmueller", "driving_accuracy": 62.43, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.48},{"name": "Sami Valimaki", "driving_accuracy": 62.39, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.32},{"name": "Rikuya Hoshino", "driving_accuracy": 62.19, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.42},{"name": "Mark Hubbard", "driving_accuracy": 62.15, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.25},{"name": "Isaiah Salinda", "driving_accuracy": 62.11, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.50},{"name": "Adam Hadwin", "driving_accuracy": 62.09, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.35},{"name": "Ryo Hisatsune", "driving_accuracy": 62.05, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.48},{"name": "J.J. Spaun", "driving_accuracy": 62.05, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.40},{"name": "William Mouw", "driving_accuracy": 61.89, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.38},{"name": "Ben Martin", "driving_accuracy": 61.85, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.42},{"name": "Harris English", "driving_accuracy": 61.76, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.32},{"name": "Joe Highsmith", "driving_accuracy": 61.58, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.45},{"name": "Taylor Dickson", "driving_accuracy": 61.51, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.30},{"name": "Robert MacIntyre", "driving_accuracy": 61.48, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.50},{"name": "Lanto Griffin", "driving_accuracy": 61.46, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.25},{"name": "Keegan Bradley", "driving_accuracy": 61.39, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.48},{"name": "Chandler Phillips", "driving_accuracy": 61.33, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.35},{"name": "Matt Fitzpatrick", "driving_accuracy": 61.29, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.42},{"name": "Bud Cauley", "driving_accuracy": 61.24, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.40},{"name": "Chris Kirk", "driving_accuracy": 61.22, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.38},{"name": "Jason Day", "driving_accuracy": 61.06, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.48},{"name": "Will Chandler", "driving_accuracy": 61.04, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.32},{"name": "Steven Fisk", "driving_accuracy": 60.94, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.45},{"name": "Chan Kim", "driving_accuracy": 60.94, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.30},{"name": "Sam Ryder", "driving_accuracy": 60.87, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.50},{"name": "Denny McCarthy", "driving_accuracy": 60.78, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.25},{"name": "Patton Kizzire", "driving_accuracy": 60.71, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.48},{"name": "Ricky Castillo", "driving_accuracy": 60.63, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.35},{"name": "Jacob Bridgeman", "driving_accuracy": 60.60, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.42},{"name": "Tom Hoge", "driving_accuracy": 60.54, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.40},{"name": "Akshay Bhatia", "driving_accuracy": 60.51, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.38},{"name": "Max Homa", "driving_accuracy": 60.49, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.48},{"name": "Keith Mitchell", "driving_accuracy": 60.36, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.32},{"name": "Sam Burns", "driving_accuracy": 60.20, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.50},{"name": "Nate Lashley", "driving_accuracy": 60.11, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.25},{"name": "Mac Meissner", "driving_accuracy": 60.09, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.48},{"name": "Matteo Manassero", "driving_accuracy": 60.06, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.35},{"name": "Ben Griffin", "driving_accuracy": 60.03, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.42},{"name": "Tom Kim", "driving_accuracy": 60.00, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.40},{"name": "Patrick Rodgers", "driving_accuracy": 59.96, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.38},{"name": "Kaito Onishi", "driving_accuracy": 59.93, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.48},{"name": "Ryan Palmer", "driving_accuracy": 59.87, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.32},{"name": "Trevor Cone", "driving_accuracy": 59.81, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.50},{"name": "Matt Wallace", "driving_accuracy": 59.73, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.25},{"name": "Matthew Riedel", "driving_accuracy": 59.72, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.48},{"name": "Sam Stevens", "driving_accuracy": 59.65, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.35},{"name": "Ludvig Åberg", "driving_accuracy": 59.52, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.42},{"name": "Erik van Rooyen", "driving_accuracy": 59.30, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.40},{"name": "Harry Higgs", "driving_accuracy": 59.21, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.38},{"name": "Maverick McNealy", "driving_accuracy": 59.15, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.48},{"name": "Luke Clanton", "driving_accuracy": 59.08, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.32},{"name": "Taylor Moore", "driving_accuracy": 59.00, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.50},{"name": "Gary Woodland", "driving_accuracy": 59.00, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.25},{"name": "Patrick Cantlay", "driving_accuracy": 58.94, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.48},{"name": "Michael Kim", "driving_accuracy": 58.93, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.35},{"name": "Taylor Pendrith", "driving_accuracy": 58.74, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.42},{"name": "Mason Andersen", "driving_accuracy": 58.69, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.40},{"name": "David Skinns", "driving_accuracy": 58.64, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.38},{"name": "Justin Rose", "driving_accuracy": 58.54, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.48},{"name": "Antoine Rozner", "driving_accuracy": 58.51, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.32},{"name": "Hideki Matsuyama", "driving_accuracy": 58.50, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.50},{"name": "Nick Hardy", "driving_accuracy": 58.33, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.25},{"name": "Adam Scott", "driving_accuracy": 58.33, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.48},{"name": "Patrick Fishburn", "driving_accuracy": 58.32, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.35},{"name": "Garrick Higgo", "driving_accuracy": 58.14, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.42},{"name": "Will Gordon", "driving_accuracy": 58.12, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.40},{"name": "Jordan Spieth", "driving_accuracy": 58.12, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.38},{"name": "Harry Hall", "driving_accuracy": 58.05, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.48},{"name": "Hayden Springer", "driving_accuracy": 58.00, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.32},{"name": "Eric Cole", "driving_accuracy": 57.88, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.50},{"name": "Quade Cummins", "driving_accuracy": 57.82, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.25},{"name": "Kurt Kitayama", "driving_accuracy": 57.75, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.48},{"name": "Jeremy Paul", "driving_accuracy": 57.60, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.35},{"name": "Jackson Suber", "driving_accuracy": 57.29, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.42},{"name": "Andrew Novak", "driving_accuracy": 57.20, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.40},{"name": "Sahith Theegala", "driving_accuracy": 57.05, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.38},{"name": "Matti Schmid", "driving_accuracy": 57.03, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.48},{"name": "Tony Finau", "driving_accuracy": 56.94, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.32},{"name": "Mackenzie Hughes", "driving_accuracy": 56.79, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.50},{"name": "Thomas Detry", "driving_accuracy": 56.75, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.25},{"name": "Jesper Svensson", "driving_accuracy": 56.67, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.48},{"name": "Karl Vilips", "driving_accuracy": 56.61, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.35},{"name": "Adam Schenk", "driving_accuracy": 56.42, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.42},{"name": "Alejandro Tosti", "driving_accuracy": 56.15, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.40},{"name": "Vince Whaley", "driving_accuracy": 56.15, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.38},{"name": "Danny Walker", "driving_accuracy": 55.94, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.48},{"name": "Joseph Bramlett", "driving_accuracy": 55.92, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.32},{"name": "Rafael Campos", "driving_accuracy": 55.91, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.50},{"name": "Max Greyserman", "driving_accuracy": 55.82, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.25},{"name": "Tim Widing", "driving_accuracy": 55.80, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.48},{"name": "Chris Gotterup", "driving_accuracy": 55.75, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.35},{"name": "Rasmus Højgaard", "driving_accuracy": 55.68, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.42},{"name": "Aldrich Potgieter", "driving_accuracy": 55.63, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.40},{"name": "Jake Knapp", "driving_accuracy": 55.62, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.38},{"name": "Xander Schauffele", "driving_accuracy": 55.58, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.72},{"name": "Min Woo Lee", "driving_accuracy": 55.52, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.32},{"name": "Wyndham Clark", "driving_accuracy": 55.49, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.50},{"name": "Davis Riley", "driving_accuracy": 55.13, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.25},{"name": "Beau Hossler", "driving_accuracy": 54.88, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.48},{"name": "Stephan Jaeger", "driving_accuracy": 54.68, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.35},{"name": "Byeong Hun An", "driving_accuracy": 54.35, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.42},{"name": "Jhonattan Vegas", "driving_accuracy": 54.24, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.40},{"name": "Cam Davis", "driving_accuracy": 53.90, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.38},{"name": "Cameron Young", "driving_accuracy": 53.85, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.48},{"name": "Braden Thornberry", "driving_accuracy": 53.66, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.32},{"name": "Justin Thomas", "driving_accuracy": 53.32, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.50},{"name": "Camilo Villegas", "driving_accuracy": 53.23, "scrambling": 58, "putting_avg": 1.77, "sg_approach": 0.25},{"name": "Nicolai Højgaard", "driving_accuracy": 53.19, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.48},{"name": "Trey Mullinax", "driving_accuracy": 52.57, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.35},{"name": "Ryan Fox", "driving_accuracy": 52.28, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.42},{"name": "Cristobal Del Solar", "driving_accuracy": 51.72, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.40},{"name": "Niklas Norgaard", "driving_accuracy": 51.62, "scrambling": 61, "putting_avg": 1.74, "sg_approach": 0.38},{"name": "Taylor Montgomery", "driving_accuracy": 51.42, "scrambling": 60, "putting_avg": 1.75, "sg_approach": 0.48},{"name": "Rory McIlroy", "driving_accuracy": 51.24, "scrambling": 57, "putting_avg": 1.79, "sg_approach": 0.58},{"name": "Nick Dunlap", "driving_accuracy": 51.06, "scrambling": 63, "putting_avg": 1.73, "sg_approach": 0.32},{"name": "Peter Malnati", "driving_accuracy": 48.06, "scrambling": 62, "putting_avg": 1.72, "sg_approach": 0.50},{"name": "Frankie Capan III", "driving_accuracy": 45.82, "scrambling": 59, "putting_avg": 1.76, "sg_approach": 0.25}];
+
+        function calculateScore(g) {
+            return (g.driving_accuracy / 100 * 0.35 + g.scrambling / 100 * 0.25 + (2 - g.putting_avg) * 0.25 + (g.sg_approach + 0.5) / 2 * 0.15) * 100;
+        }
+
+        data.forEach(g => g.fit_score = calculateScore(g));
+        data.sort((a, b) => b.fit_score - a.fit_score);
+
+        const table = document.getElementById('golferTable');
+        data.forEach(g => {
+            const row = table.insertRow();
+            row.insertCell(0).textContent = g.name;
+            row.insertCell(1).textContent = g.driving_accuracy + '%';
+            row.insertCell(2).textContent = g.scrambling + '%';
+            row.insertCell(3).textContent = g.putting_avg;
+            row.insertCell(4).textContent = g.sg_approach.toFixed(2);
+            row.insertCell(5).textContent = g.fit_score.toFixed(2);
+        });
+
+        function sortTable(n) {
+            data.sort((a, b) => {
+                if (n === 0) return a.name.localeCompare(b.name);
+                if (n === 5) return b.fit_score - a.fit_score;
+                if (n === 1) return b.driving_accuracy - a.driving_accuracy;
+                if (n === 2) return b.scrambling - a.scrambling;
+                if (n === 3) return a.putting_avg - b.putting_avg;
+                if (n === 4) return b.sg_approach - a.sg_approach;
+            });
+            while (table.rows.length > 1) table.deleteRow(1);
+            data.forEach(g => {
+                const row = table.insertRow();
+                row.insertCell(0).textContent = g.name;
+                row.insertCell(1).textContent = g.driving_accuracy + '%';
+                row.insertCell(2).textContent = g.scrambling + '%';
+                row.insertCell(3).textContent = g.putting_avg;
+                row.insertCell(4).textContent = g.sg_approach.toFixed(2);
+                row.insertCell(5).textContent = g.fit_score.toFixed(2);
+            });
+        }
+
+        function filterTable() {
+            const filter = document.getElementById('filterInput').value.toLowerCase();
+            const rows = table.rows;
+            for (let i = 1; i < rows.length; i++) {
+                const name = rows[i].cells[0].textContent.toLowerCase();
+                rows[i].style.display = name.includes(filter) ? '' : 'none';
+            }
+        }
+    </script>
+</body>
+</html>
